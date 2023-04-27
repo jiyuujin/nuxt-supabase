@@ -7,11 +7,18 @@ export default defineNuxtConfig({
   serverMiddleware: [
     { path: '/api/hello', handler: '~/server/api/hello.ts'},
   ],
+  modules: ['@nuxtjs/supabase'],
   vite: {
     plugins: [
       svgLoader({
         svgo: false,
       }),
     ],
+  },
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_KEY, // ANON_KEY
+    },
   },
 })
