@@ -3,7 +3,13 @@ import GitHubLogo from '~/assets/github_logo.svg'
 import GoogleLogo from '~/assets/google_logo.svg'
 import { useSupabase } from '~/composables/useSupabase'
 
-const { hasUser, login, logout } = useSupabase()
+const secretWord = ref()
+const receiptId = ref()
+const { hasUser, login, logout, addEventUser } = useSupabase()
+
+function onPurchase() {
+  addEventUser(secretWord.value, receiptId.value)
+}
 </script>
 
 <template>
@@ -15,6 +21,7 @@ const { hasUser, login, logout } = useSupabase()
       <button @click="!hasUser ? login('google') : logout">
         <GoogleLogo />
       </button>
+      <button @click="onPurchase">購入 (テスト)</button>
     </div>
   </div>
 </template>

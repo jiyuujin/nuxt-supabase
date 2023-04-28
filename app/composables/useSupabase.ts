@@ -1,8 +1,11 @@
+import { useSupabaseForm } from '~/composables/useSupabaseForm'
+
 export type Provider = 'github' | 'google'
 
 export function useSupabase() {
   const user = useSupabaseUser()
   const authClient = useSupabaseAuthClient()
+  const form = useSupabaseForm({ user })
 
   const router = useRouter()
 
@@ -26,5 +29,5 @@ export function useSupabase() {
     authClient.auth.signOut()
   }
 
-  return { hasUser, login, logout }
+  return { hasUser, login, logout, ...form }
 }
